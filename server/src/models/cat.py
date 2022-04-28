@@ -4,13 +4,14 @@ from db import Db
 def sanitize(cats):
     if not isinstance(cats, (list, tuple)):
         cats = [cats]
-    clean_cats = []
-    for cat in cats:
-        if not isinstance(cat, dict):
-            continue
-        if not (cat.get("id") and cat.get("name")):
-            continue
-        clean_cats.append(cat)
+
+    clean_cats = list(
+        filter(
+            lambda cat: isinstance(cat, dict) and cat.get("name") and cat.get("id"),
+            cats,
+        )
+    )
+
     return clean_cats
 
 
@@ -25,7 +26,7 @@ def post(cats):
     queries = [{"sql": sql, "bind": cat.get("name")} for cat in cats]
 
     db = Db.get_instance()
-    result = db.transactional(queries)
+    db.transactional(queries)
     return cats
 
 

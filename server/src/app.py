@@ -1,7 +1,6 @@
-from flask import Flask, jsonify, request, make_response, g
+from flask import Flask, jsonify, request, make_response
 from models.dog import Dog
-from models import cat
-from db import Db
+from models import cat as cat_api
 
 app = Flask(__name__)
 
@@ -62,10 +61,10 @@ def dog(dog_id):
 @app.route("/cats", methods=["GET", "POST"])
 def cats():
     if request.method == "GET":
-        return jsonify(cat.get())
+        return jsonify(cat_api.get())
 
     elif request.method == "POST":
-        created = cat.post(request.json())
+        created = cat_api.post(request.json)
 
         if not created:
             return make_response(
@@ -78,6 +77,32 @@ def cats():
             )
 
         return jsonify(created)
+
+
+@app.route("/cats/<int:cat_id>", methods=["GET", "PUT", "DELETE"])
+def cat_detail(cat_id: int):
+    cat = cat_api.get({"id": cat_id})
+
+    if not cat:
+        return make_response(jsonify({"error": "Cat not found."}), 404)
+
+    if request.method == "GET":
+        return jsonify(cat)
+    elif request.method == "DELETE":
+        return jsonify(cat_api.delete(cat.get("id")))
+    elif request.method == "PUT":
+        updated = cat_api.put({**request.json, "id": cat_id})
+        if not updated:
+            return make_response(
+                jsonify(
+                    {
+                        "error": "Failed to update. There are items in your request that are invalid."
+                    }
+                ),
+                400,
+            )
+
+        return jsonify(updated)
 
 
 if __name__ == "__main__":
