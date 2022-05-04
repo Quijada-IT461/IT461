@@ -1,7 +1,8 @@
 from flask import request, make_response, jsonify
 from v1.cat.model import CatModel
 
-class CatController():
+
+class CatController:
     _instance = None
 
     def __init__(self) -> None:
@@ -11,9 +12,14 @@ class CatController():
         print(request.json)
         resp = self._instance.create(request.json)
         if resp == False:
-            return make_response(jsonify({
-                "error": "Failed to add. There are items in your request that are invalid."
-            }), 400)
+            return make_response(
+                jsonify(
+                    {
+                        "error": "Failed to add. There are items in your request that are invalid."
+                    }
+                ),
+                400,
+            )
         return jsonify(resp)
 
     def check(self, cat_id):
@@ -38,12 +44,17 @@ class CatController():
             if not isinstance(cat, dict):
                 return cat
             cat_data = request.json
-            cat_data['id'] = cat_id
+            cat_data["id"] = cat_id
             resp = self._instance.update(cat_data)
             if resp == False:
-                return make_response(jsonify({
-                    "error": "Failed to update. There are items in your request that are invalid."
-                }), 400)
+                return make_response(
+                    jsonify(
+                        {
+                            "error": "Failed to update. There are items in your request that are invalid."
+                        }
+                    ),
+                    400,
+                )
             return jsonify(resp)
         return jsonify(self._instance.update(request.json))
 
