@@ -1,6 +1,7 @@
 import pymysql.cursors
 
-class Db():
+
+class Db:
     __instance = None
     connection = None
     hostname = "flask-db"
@@ -22,7 +23,9 @@ class Db():
             Db()
         return Db.__instance
 
-    def connect(self, hostname=None, port=None, username=None, password=None, database=None):
+    def connect(
+        self, hostname=None, port=None, username=None, password=None, database=None
+    ):
         if hostname is not None:
             self.hostname = hostname
         if port is not None:
@@ -40,7 +43,7 @@ class Db():
             password=self.password,
             database=self.database,
             cursorclass=pymysql.cursors.DictCursor,
-            autocommit=False
+            autocommit=False,
         )
         return self.connection
 
@@ -70,7 +73,7 @@ class Db():
         counter = 0
         try:
             for query in queries:
-                counter += self.execute(query['sql'], query['bind'])
+                counter += self.execute(query["sql"], query["bind"])
         except:
             self.connection.rollback()
             return False
