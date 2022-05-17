@@ -30,8 +30,8 @@ class UserModel:
 
         has_filters = bool(len(query_by))
         if has_filters:
-            q = [f"{col} = %s" for col in query_by.keys()]
-            sql += f' WHERE ({ " AND ".join(q) })'
+            queries = [f"{col} = %s" for col in query_by.keys()]
+            sql += f' WHERE ({ " AND ".join(queries) })'
 
         sql += (
             f" ORDER BY id LIMIT {filters.get('offset', 0)}, {filters.get('limit', 5)}"
