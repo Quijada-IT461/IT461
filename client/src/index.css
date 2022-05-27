@@ -18,12 +18,12 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; 
-  padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem 0.5rem;
 }
 
 section {
@@ -34,7 +34,7 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     padding: 1rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 form {
@@ -45,27 +45,28 @@ form {
     padding-bottom: 1rem;
 }
 
-a, a:visited {
+a,
+a:visited {
     color: #fff;
 }
 
-input[type="text"],
-input[type="password"],
+input[type='text'],
+input[type='password'],
 button,
 textarea {
-  font-family: 'Nunito', sans-serif;
-  font-size: 22px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
 }
 
 label,
 button {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 button {
-  padding: 0.5rem;
+    padding: 0.5rem;
 }
 
 li {
@@ -122,4 +123,51 @@ li {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+}
+
+dialog {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 350px;
+    border-radius: 8px;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+dialog > form > footer,
+dialog > form > header {
+    padding-inline: 1rem;
+}
+
+dialog > form > header {
+    padding-block: 0.75rem 0.5rem;
+}
+dialog > form > header p {
+    font-size: large;
+    color: hsla(0, 0%, 20%, 80%);
+}
+
+dialog > form > footer {
+    padding-block-start: 0.5rem;
+}
+dialog > form > footer,
+dialog > form > footer > menu {
+    display: flex;
+}
+dialog > form > footer > menu {
+    margin-inline-start: auto;
+    gap: 0.5rem;
+}
+dialog > form > footer > menu button {
+    font-size: 0.75rem;
+    padding-block: 0.3125rem;
+    cursor: pointer;
+}
+dialog > form > footer > menu button.cancel {
+    background: none;
+    border: none;
 }
