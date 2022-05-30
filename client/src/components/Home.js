@@ -1,18 +1,18 @@
-import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { useNavigate, Link } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../context/AuthProvider';
 
 const Home = () => {
     const { setAuth, keepLogin } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const logout = async () => {
-        // if used in more components, this should be in context 
-        // axios to /logout endpoint 
+        // if used in more components, this should be in context
+        // axios to /logout endpoint
         setAuth({});
         keepLogin({});
         navigate('/login');
-    }
+    };
 
     return (
         <section>
@@ -21,12 +21,13 @@ const Home = () => {
             <p>You are logged in!</p>
             <br />
             <Link to="/dogs">Go to the Dogs page</Link>
+            <Link to="/cats">Go to the Cats page</Link>
             <br />
             <div className="flexGrow">
                 <button onClick={logout}>Sign Out</button>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

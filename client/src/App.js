@@ -15,6 +15,8 @@ import useAxiosPrivate from './hooks/useAxiosPrivate';
 import DogAdd from './components/DogAdd';
 import DogDetail from './components/DogDetail';
 import DogEdit from './components/DogEdit';
+import Cats from './components/Cats';
+import CatDetail from './components/CatDetail';
 
 const ROLES = {
     User: 2001,
@@ -77,6 +79,11 @@ function App() {
                 {/* we want to protect these routes */}
                 <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
                     <Route path="/" element={<Home />} />
+                </Route>
+
+                <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
+                    <Route path="cats" element={<Cats />} />
+                    <Route path="cats/:id" element={<CatDetail />} />
                 </Route>
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>

@@ -139,7 +139,8 @@ dialog::backdrop {
 }
 
 dialog > form > footer,
-dialog > form > header {
+dialog > form > header,
+dialog > form > article {
     padding-inline: 1rem;
 }
 
@@ -149,6 +150,12 @@ dialog > form > header {
 dialog > form > header p {
     font-size: large;
     color: hsla(0, 0%, 20%, 80%);
+}
+
+dialog > form > article > label {
+    display: block;
+    font-size: 1rem;
+    font-weight: normal;
 }
 
 dialog > form > footer {
